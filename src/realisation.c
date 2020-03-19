@@ -57,6 +57,7 @@ void input_from_file(char* str, vec_sys_struct* vec_sys_part)
     int counter = 0;
     int iter = 0;
     if (vec_sys_part == NULL){
+        fclose(file);
         return;
     }
 
@@ -169,13 +170,11 @@ void* min_norm(void* args)
 {
     vec_sys_struct* vec_sys_part = (vec_sys_struct*) args;
 
-    int index_min = 0;
-    double norm_min;
-
     if (vec_sys_part != NULL) {
 
-        norm_min = norm_from_vec_dif(vec_sys_part->vec_sys[0], vec_sys_part->temp_vec);
+        double norm_min = norm_from_vec_dif(vec_sys_part->vec_sys[0], vec_sys_part->temp_vec);
         double temp_norm = 0;
+        int index_min = 0;
 
         for (int i = 0; i < vec_sys_part->len; ++i) {
             temp_norm = norm_from_vec_dif(vec_sys_part->vec_sys[i], vec_sys_part->temp_vec);
@@ -215,9 +214,9 @@ void del_vec_sys(double** vec_sys, size_t sys_len)
 int take_min(vec_sys_struct* vec_sys, vec_sys_struct* block, int len)
 {
     int ans = 0;
-    int min_index = 0;
     double min = 0;
     if (block != NULL){
+        int min_index = 0;
         min = block[0].norm_min;
 
         for (int i = 0; i < len; ++i) {
