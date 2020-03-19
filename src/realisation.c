@@ -5,10 +5,11 @@ void input_temp_vec(vec_sys_struct* vec_sys_part)
 {
     double comp = 0;
     double* vec = (double*)malloc(VEC_LEN * sizeof(double));
+    int input_num = 0;
 
     if (vec != NULL){
         for (int i = 0; i < VEC_LEN; ++i){
-            scanf("%lf", &comp);
+            input_num = scanf("%lf", &comp);
             vec[i] = comp;
         }
     }
@@ -37,10 +38,11 @@ void input_temp_vec_from_file(char* str, vec_sys_struct* vec_sys_part)
     FILE* file = fopen(str, "r");
     double comp = 0;
     double* vec = (double*)malloc(VEC_LEN * sizeof(double));
+    int input_num = 0;
 
     if (vec != NULL){
         for (int i = 0; i < VEC_LEN; ++i){
-            fscanf(file, "%lf", &comp);
+            input_num = fscanf(file, "%lf", &comp);
             vec[i] = comp;
         }
     }
