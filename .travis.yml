@@ -1,0 +1,53 @@
+dist:     trusty
+sudo:     required
+
+language: c
+
+os:
+
+  - linux
+  - osx
+
+compiler:
+
+  - gcc
+  - clang
+
+addons:
+  apt:
+    packages:
+      - valgrind
+      - cppcheck
+      - make
+      - cmake
+
+
+env:
+
+  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
+  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
+  - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+  - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+
+matrix:
+  exclude:
+
+    - os:       osx
+      compiler: gcc
+
+    - os:  osx
+      env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+
+    - os:  osx
+      env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+
+
+script:
+
+  - mkdir build
+  - cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
+  - cmake --build .
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then valgrind ./IHT-2 ; fi
+  - cd ..
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cppcheck --std=c99 --enable=warning,style,performance,information ./src ./include/*.h; fi
