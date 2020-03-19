@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(IHT_2 C)
+project(IHT-2 C)
 enable_language(C CXX ASM)
 
 set(CMAKE_REQUIRED_LIBRARIES m)
