@@ -21,5 +21,7 @@ if(UNIX AND NOT APPLE)
     set(CMAKE_REQUIRED_LIBRARIES m)
     target_link_libraries(${PROJECT_NAME} m)
     find_package(Threads REQUIRED)
-    target_link_libraries(${PROJECT_NAME} Threads::Threads static_lib shared_lib)
+    target_link_libraries(${PROJECT_NAME} Threads::Threads)
 endif()
+
+target_link_libraries(${PROJECT_NAME} static_lib shared_lib)
