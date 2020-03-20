@@ -240,7 +240,7 @@ int take_min(vec_sys_struct* vec_sys, vec_sys_struct* block, int len)
     return ans;
 }
 
-int getNumCores() {
+int get_num_cores() {
 #ifdef MACOS
     int nm[2];
     size_t len = 4;

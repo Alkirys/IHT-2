@@ -1,9 +1,10 @@
 #include "../include/lib_parallel.h"
+#include "../include/realisation.h"
 
 
 int parallel_search(vec_sys_struct* vec_sys)
 {
-    int num_threads = getNumCores();
+    int num_threads = get_num_cores();
 
     pthread_t threads[num_threads];
     int status;

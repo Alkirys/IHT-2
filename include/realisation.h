@@ -38,4 +38,4 @@ void input_temp_vec_from_file(char* str, vec_sys_struct* vec_sys_part);
 void del_vec(double* vec);
 void del_vec_sys(double** vec_sys, size_t sys_len);
 int take_min(vec_sys_struct* vec_sys, vec_sys_struct* block, int len);
-int getNumCores();
+int get_num_cores();
