@@ -1,8 +1,6 @@
 #pragma once
 
 #include "../include/realisation.h"
-#include <sys/sysinfo.h>
-#include <pthread.h>
 
 #define ERROR_CREATE_THREAD -11
 #define ERROR_JOIN_THREAD   -12
