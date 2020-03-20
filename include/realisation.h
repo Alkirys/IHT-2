@@ -13,7 +13,6 @@
 #endif
 
 #define VEC_LEN 100
-#define FILENAME "../input.txt"
 #define ERROR_CREATE_THREAD -11
 #define ERROR_JOIN_THREAD   -12
 #define SUCCESS 0
