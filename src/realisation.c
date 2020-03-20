@@ -8,7 +8,7 @@ void input_temp_vec(vec_sys_struct* vec_sys_part)
 
     if (vec != NULL){
         for (int i = 0; i < VEC_LEN; ++i){
-            if (0 != scanf("%lf", &comp))
+            if (0 != scanf("%15lf", &comp))
                 vec[i] = comp;
         }
     }
@@ -40,7 +40,7 @@ void input_temp_vec_from_file(char* str, vec_sys_struct* vec_sys_part)
 
     if (vec != NULL){
         for (int i = 0; i < VEC_LEN; ++i){
-            if(0 != fscanf(file, "%lf", &comp))
+            if(0 != fscanf(file, "%15lf", &comp))
                 vec[i] = comp;
         }
     }
@@ -64,7 +64,7 @@ void input_from_file(char* str, vec_sys_struct* vec_sys_part)
     vec_sys_part->len = 0;
     vec_sys_part->counter = 0;
 
-    while (EOF != fscanf(file, "%lf", &comp)) {
+    while (EOF != fscanf(file, "%15lf", &comp)) {
         if (vec_sys_part->len == iter){
             double** temp_p = NULL;
             temp_p = grow(vec_sys_part->vec_sys, &vec_sys_part->len);
@@ -108,7 +108,7 @@ void input(vec_sys_struct* vec_sys_part)
     vec_sys_part->len = 0;
     vec_sys_part->counter = 0;
 
-    while (scanf("%lf", &comp)) {
+    while (scanf("%15lf", &comp)) {
         if (vec_sys_part->len == iter){
             double** temp_p = NULL;
             temp_p = grow(vec_sys_part->vec_sys, &vec_sys_part->len);
@@ -238,4 +238,24 @@ int take_min(vec_sys_struct* vec_sys, vec_sys_struct* block, int len)
     vec_sys->norm_min = min;
 
     return ans;
+}
+
+int getNumCores() {
+#ifdef MACOS
+    int nm[2];
+    size_t len = 4;
+    uint32_t count;
+
+    nm[0] = CTL_HW; nm[1] = HW_AVAILCPU;
+    sysctl(nm, 2, &count, &len, NULL, 0);
+
+    if(count < 1) {
+        nm[1] = HW_NCPU;
+        sysctl(nm, 2, &count, &len, NULL, 0);
+        if(count < 1) { count = 1; }
+    }
+    return count;
+#else
+    return (int)sysconf(_SC_NPROCESSORS_ONLN);
+#endif
 }

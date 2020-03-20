@@ -4,8 +4,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include <sys/sysinfo.h>
 #include <pthread.h>
+#ifdef MACOS
+#include <sys/param.h>
+#include <sys/sysctl.h>
+#else
+#include <unistd.h>
+#endif
 
 #define VEC_LEN 100
 #define FILENAME "../input.txt"
@@ -33,3 +38,4 @@ void input_temp_vec_from_file(char* str, vec_sys_struct* vec_sys_part);
 void del_vec(double* vec);
 void del_vec_sys(double** vec_sys, size_t sys_len);
 int take_min(vec_sys_struct* vec_sys, vec_sys_struct* block, int len);
+int getNumCores();

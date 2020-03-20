@@ -3,7 +3,7 @@
 
 int parallel_search(vec_sys_struct* vec_sys)
 {
-    int num_threads = get_nprocs();
+    int num_threads = getNumCores();
 
     pthread_t threads[num_threads];
     int status;

@@ -133,7 +133,6 @@ int test1()
     printf("\nIndex of the vector with the minimum norm: ");
     printf("%d", vec_sys.min_index);
     printf("\n\n");
-    printf("///////////////////////////////");
 
     beg = clock();
     parallel_search(&vec_sys);
@@ -197,6 +196,7 @@ int test2()
     printf("\nParallel time: ");
     printf("%lf", time);
     printf("\n");
+    printf("///////////////////////////////");
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 100 && vec_sys.norm_min == 0.0){
         is_all_right_par = 1;
@@ -245,7 +245,6 @@ int test3()
     printf("\nIndex of the vector with the minimum norm: ");
     printf("%d", vec_sys.min_index);
     printf("\n\n");
-    printf("///////////////////////////////");
 
     beg = clock();
     parallel_search(&vec_sys);
@@ -312,6 +311,7 @@ int test4()
     printf("\nParallel time: ");
     printf("%lf", time);
     printf("\n");
+    printf("///////////////////////////////");
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 8){
         is_all_right_par = 1;
@@ -362,6 +362,7 @@ int test5()
     printf("\nParallel time: ");
     printf("%lf", time);
     printf("\n");
+    printf("///////////////////////////////");
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 55 && vec_sys.norm_min == 0.0){
         is_all_right_par = 1;
