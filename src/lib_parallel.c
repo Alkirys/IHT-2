@@ -1,4 +1,3 @@
-#pragma once
 #include "../include/lib_parallel.h"
 #include "../include/realisation.h"
 
