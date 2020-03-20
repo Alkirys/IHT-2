@@ -1,4 +1,6 @@
+#pragma once
 #include "../include/lib_parallel.h"
+#include "../include/realisation.h"
 
 
 int parallel_search(vec_sys_struct* vec_sys)

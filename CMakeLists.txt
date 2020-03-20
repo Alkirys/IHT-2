@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.9.2)
 project(IHT-2 C)
-enable_language(C CXX ASM)
+enable_language(C)
 
 set(CMAKE_REQUIRED_LIBRARIES m)
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -std=c11 -Werror -Wall -Wpedantic -fPIC" )
 
 set(CMAKE_C_STANDARD 99)
-
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
