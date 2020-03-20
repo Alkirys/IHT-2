@@ -173,11 +173,10 @@ void* min_norm(void* args)
     if (vec_sys_part != NULL) {
 
         double norm_min = norm_from_vec_dif(vec_sys_part->vec_sys[0], vec_sys_part->temp_vec);
-        double temp_norm = 0;
         int index_min = 0;
 
         for (int i = 0; i < vec_sys_part->len; ++i) {
-            temp_norm = norm_from_vec_dif(vec_sys_part->vec_sys[i], vec_sys_part->temp_vec);
+            double temp_norm = norm_from_vec_dif(vec_sys_part->vec_sys[i], vec_sys_part->temp_vec);
             if (norm_min < 0) {
                 norm_min = temp_norm;
             }
