@@ -1,6 +1,6 @@
 #include "../include/lib_parallel.h"
 #include "../include/lib_sequintally.h"
-#include "../include/realisation.h"
+#include "../include/auxiliary_functions.h"
 #include <time.h>
 
 void create_file(int num_vec, char* filename);
@@ -106,7 +106,7 @@ int test1()
 {
     int is_all_right_seq = 0;
     int is_all_right_par = 0;
-    int vec_num = 8;
+    int vec_num = 1000;
 
     char* filename = "../files/input_temp_vec.txt";
     vec_sys_struct vec_sys;
@@ -115,13 +115,8 @@ int test1()
     //input_temp_vec(&vec_sys);
     input_from_file("../files/test_file2.txt", &vec_sys);
     //input(&vec_sys_part);
-    clock_t beg = clock();
+
     sequintally_search(&vec_sys);
-    clock_t end = clock();
-    double time =(double)(end - beg);
-    printf("\nSequintally time: ");
-    printf("%lf", time);
-    printf("\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_seq = 1;
@@ -133,14 +128,9 @@ int test1()
     printf("\nIndex of the vector with the minimum norm: ");
     printf("%d", vec_sys.min_index);
     printf("\n\n");
+    int min_index_seq = vec_sys.min_index;
 
-    beg = clock();
     parallel_search(&vec_sys);
-    end = clock();
-    time =(double)(end - beg);
-    printf("\nParallel time: ");
-    printf("%lf", time);
-    printf("\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_par = 1;
@@ -153,11 +143,12 @@ int test1()
     printf("%d", vec_sys.min_index);
     printf("\n\n");
     printf("///////////////////////////////");
+    int min_index_par = vec_sys.min_index;
 
     del_vec(vec_sys.temp_vec);
     del_vec_sys(vec_sys.vec_sys, vec_sys.len);
 
-    if (is_all_right_par && is_all_right_seq){
+    if (is_all_right_par && is_all_right_seq && min_index_par == min_index_seq){
         return 1;
     }
     else{
@@ -177,36 +168,27 @@ int test2()
     //input_temp_vec(&vec_sys);
     input_from_file("../files/test_file1.txt", &vec_sys);
     //input(&vec_sys_part);
-    clock_t beg = clock();
+
     sequintally_search(&vec_sys);
-    clock_t end = clock();
-    double time =(double)(end - beg);
-    printf("\nSequintally time: ");
-    printf("%lf", time);
-    printf("\n");
+
+    int min_index_seq = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 100 && vec_sys.norm_min == 0.0){
         is_all_right_seq = 1;
     }
 
-    beg = clock();
     parallel_search(&vec_sys);
-    end = clock();
-    time =(double)(end - beg);
-    printf("\nParallel time: ");
-    printf("%lf", time);
-    printf("\n");
-    printf("///////////////////////////////");
+
+    int min_index_par = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 100 && vec_sys.norm_min == 0.0){
         is_all_right_par = 1;
     }
 
-
     del_vec(vec_sys.temp_vec);
     del_vec_sys(vec_sys.vec_sys, vec_sys.len);
 
-    if (is_all_right_par && is_all_right_seq){
+    if (is_all_right_par && is_all_right_seq && min_index_par == min_index_seq){
         return 1;
     }
     else{
@@ -227,13 +209,8 @@ int test3()
     //input_temp_vec(&vec_sys);
     input_from_file("../files/test_file2.txt", &vec_sys);
     //input(&vec_sys_part);
-    clock_t beg = clock();
+
     sequintally_search(&vec_sys);
-    clock_t end = clock();
-    double time =(double)(end - beg);
-    printf("\nSequintally time: ");
-    printf("%lf", time);
-    printf("\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_seq = 1;
@@ -245,14 +222,9 @@ int test3()
     printf("\nIndex of the vector with the minimum norm: ");
     printf("%d", vec_sys.min_index);
     printf("\n\n");
+    int min_index_seq = vec_sys.min_index;
 
-    beg = clock();
     parallel_search(&vec_sys);
-    end = clock();
-    time =(double)(end - beg);
-    printf("\nParallel time: ");
-    printf("%lf", time);
-    printf("\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_par = 1;
@@ -265,11 +237,12 @@ int test3()
     printf("%d", vec_sys.min_index);
     printf("\n\n");
     printf("///////////////////////////////");
+    int min_index_par = vec_sys.min_index;
 
     del_vec(vec_sys.temp_vec);
     del_vec_sys(vec_sys.vec_sys, vec_sys.len);
 
-    if (is_all_right_par && is_all_right_seq){
+    if (is_all_right_par && is_all_right_seq && min_index_par == min_index_seq){
         return 1;
     }
     else{
@@ -291,27 +264,17 @@ int test4()
     //input_temp_vec(&vec_sys);
     input_from_file("../files/test_file3.txt", &vec_sys);
     //input(&vec_sys_part);
-    clock_t beg = clock();
-    sequintally_search(&vec_sys);
-    clock_t end = clock();
-    double time =(double)(end - beg);
-    printf("\nSequintally time: ");
-    printf("%lf", time);
-    printf("\n");
 
+    sequintally_search(&vec_sys);
+    int min_index_seq = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 8){
         is_all_right_seq = 1;
     }
 
-    beg = clock();
     parallel_search(&vec_sys);
-    end = clock();
-    time =(double)(end - beg);
-    printf("\nParallel time: ");
-    printf("%lf", time);
-    printf("\n");
-    printf("///////////////////////////////");
+
+    int min_index_par = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 8){
         is_all_right_par = 1;
@@ -321,7 +284,7 @@ int test4()
     del_vec(vec_sys.temp_vec);
     del_vec_sys(vec_sys.vec_sys, vec_sys.len);
 
-    if (is_all_right_par && is_all_right_seq){
+    if (is_all_right_par && is_all_right_seq && min_index_par == min_index_seq){
         return 1;
     }
     else{
@@ -343,26 +306,17 @@ int test5()
     //input_temp_vec(&vec_sys);
     input_from_file("../files/test_file4.txt", &vec_sys);
     //input(&vec_sys_part);
-    clock_t beg = clock();
+
     sequintally_search(&vec_sys);
-    clock_t end = clock();
-    double time =(double)(end - beg);
-    printf("\nSequintally time: ");
-    printf("%lf", time);
-    printf("\n");
+
+    int min_index_seq = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 55 && vec_sys.norm_min == 0.0){
         is_all_right_seq = 1;
     }
 
-    beg = clock();
     parallel_search(&vec_sys);
-    end = clock();
-    time =(double)(end - beg);
-    printf("\nParallel time: ");
-    printf("%lf", time);
-    printf("\n");
-    printf("///////////////////////////////");
+    int min_index_par = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 55 && vec_sys.norm_min == 0.0){
         is_all_right_par = 1;
@@ -372,7 +326,7 @@ int test5()
     del_vec(vec_sys.temp_vec);
     del_vec_sys(vec_sys.vec_sys, vec_sys.len);
 
-    if (is_all_right_par && is_all_right_seq){
+    if (is_all_right_par && is_all_right_seq && min_index_par == min_index_seq){
         return 1;
     }
     else{

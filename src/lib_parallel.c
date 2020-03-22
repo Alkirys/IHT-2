@@ -1,6 +1,55 @@
 #include "../include/lib_parallel.h"
-#include "../include/realisation.h"
 
+
+static int take_min(vec_sys_struct* vec_sys, const vec_sys_struct* block, const int len)
+{
+    int ans = 0;
+    double min = 0;
+    if (block != NULL){
+        int min_index = 0;
+        min = block[0].norm_min;
+
+        for (int i = 0; i < len; ++i) {
+            if (min > block[i].norm_min && block[i].norm_min >= 0) {
+                min_index = i;
+                min = block[i].norm_min;
+            }
+        }
+
+        ans = min_index * (int)block[0].len + block[min_index].min_index;
+    }
+
+    int sum = 0;
+    if (block != NULL)
+        for (int i = 0; i < len; i++) {
+            sum += block[i].counter;
+        }
+    vec_sys->counter = sum;
+    vec_sys->min_index = ans;
+    vec_sys->norm_min = min;
+
+    return ans;
+}
+
+static int get_num_cores() {
+#ifdef MACOS
+    int nm[2];
+    size_t len = 4;
+    uint32_t count;
+
+    nm[0] = CTL_HW; nm[1] = HW_AVAILCPU;
+    sysctl(nm, 2, &count, &len, NULL, 0);
+
+    if(count < 1) {
+        nm[1] = HW_NCPU;
+        sysctl(nm, 2, &count, &len, NULL, 0);
+        if(count < 1) { count = 1; }
+    }
+    return count;
+#else
+    return (int)sysconf(_SC_NPROCESSORS_ONLN);
+#endif
+}
 
 int parallel_search(vec_sys_struct* vec_sys)
 {
