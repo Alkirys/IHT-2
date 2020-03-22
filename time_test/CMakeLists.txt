@@ -1,6 +1,8 @@
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
+set(CMAKE_C_STANDARD 99)
+
 file(GLOB sources
         "${PROJECT_SOURCE_DIR}/*/*.c"
         "${PROJECT_SOURCE_DIR}/*/*.cpp"
