@@ -15,9 +15,8 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 enable_testing()
 add_subdirectory(time_test)
 
-set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -std=c11 -Werror -Wall -Wpedantic -fPIC" )
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -std=c11 -Werror -Wall -Wpedantic -fPIC" )
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
