@@ -2,6 +2,7 @@
 #include "../include/lib_sequintally.h"
 #include "../include/auxiliary_functions.h"
 #include <time.h>
+#include <sys/time.h>
 
 void create_file(int num_vec, char* filename);
 int test1();
@@ -106,7 +107,10 @@ int test1()
 {
     int is_all_right_seq = 0;
     int is_all_right_par = 0;
-    int vec_num = 1000;
+    int vec_num = 10000;
+    double koef = 1000000.0;
+
+    struct timeval start, stop;
 
     char* filename = "../files/input_temp_vec.txt";
     vec_sys_struct vec_sys;
@@ -116,7 +120,13 @@ int test1()
     input_from_file("../files/test_file2.txt", &vec_sys);
     //input(&vec_sys_part);
 
+    gettimeofday(&start, NULL);
     sequintally_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nSequintally time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_seq = 1;
@@ -130,7 +140,13 @@ int test1()
     printf("\n\n");
     int min_index_seq = vec_sys.min_index;
 
+    gettimeofday(&start, NULL);
     parallel_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nParallel time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_par = 1;
@@ -161,6 +177,9 @@ int test2()
     int is_all_right_seq = 0;
     int is_all_right_par = 0;
     int vec_num = 101;
+    double koef = 1000000.0;
+
+    struct timeval start, stop;
 
     char* filename = "../files/input_temp_vec.txt";
     vec_sys_struct vec_sys;
@@ -169,7 +188,19 @@ int test2()
     input_from_file("../files/test_file1.txt", &vec_sys);
     //input(&vec_sys_part);
 
+    gettimeofday(&start, NULL);
     sequintally_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nSequintally time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
+    printf("\nMinimal norm: ");
+    printf("%lf", vec_sys.norm_min);
+    printf("\n");
+    printf("\nIndex of the vector with the minimum norm: ");
+    printf("%d", vec_sys.min_index);
+    printf("\n\n");
 
     int min_index_seq = vec_sys.min_index;
 
@@ -177,7 +208,20 @@ int test2()
         is_all_right_seq = 1;
     }
 
+    gettimeofday(&start, NULL);
     parallel_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nParallel time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
+    printf("\nMinimal norm: ");
+    printf("%lf", vec_sys.norm_min);
+    printf("\n");
+    printf("\nIndex of the vector with the minimum norm: ");
+    printf("%d", vec_sys.min_index);
+    printf("\n\n");
+    printf("///////////////////////////////");
 
     int min_index_par = vec_sys.min_index;
 
@@ -201,6 +245,9 @@ int test3()
     int is_all_right_seq = 0;
     int is_all_right_par = 0;
     int vec_num = 3;
+    double koef = 1000000.0;
+
+    struct timeval start, stop;
 
     char* filename = "../files/input_temp_vec.txt";
     vec_sys_struct vec_sys;
@@ -210,8 +257,13 @@ int test3()
     input_from_file("../files/test_file2.txt", &vec_sys);
     //input(&vec_sys_part);
 
+    gettimeofday(&start, NULL);
     sequintally_search(&vec_sys);
+    gettimeofday(&stop, NULL);
 
+    printf("\nSequintally time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
     if (vec_num == vec_sys.counter){
         is_all_right_seq = 1;
     }
@@ -224,7 +276,13 @@ int test3()
     printf("\n\n");
     int min_index_seq = vec_sys.min_index;
 
+    gettimeofday(&start, NULL);
     parallel_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nParallel time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
 
     if (vec_num == vec_sys.counter){
         is_all_right_par = 1;
@@ -255,6 +313,9 @@ int test4()
     int is_all_right_seq = 0;
     int is_all_right_par = 0;
     int vec_num = 102;
+    double koef = 1000000.0;
+
+    struct timeval start, stop;
 
     char* filename = "../files/input_temp_vec.txt";
     //create_file(vec_num * VEC_LEN, "../files/test_file4.txt");
@@ -265,14 +326,40 @@ int test4()
     input_from_file("../files/test_file3.txt", &vec_sys);
     //input(&vec_sys_part);
 
+    gettimeofday(&start, NULL);
     sequintally_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nSequintally time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
+    printf("\nMinimal norm: ");
+    printf("%lf", vec_sys.norm_min);
+    printf("\n");
+    printf("\nIndex of the vector with the minimum norm: ");
+    printf("%d", vec_sys.min_index);
+    printf("\n\n");
+
     int min_index_seq = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 8){
         is_all_right_seq = 1;
     }
 
+    gettimeofday(&start, NULL);
     parallel_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nParallel time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
+    printf("\nMinimal norm: ");
+    printf("%lf", vec_sys.norm_min);
+    printf("\n");
+    printf("\nIndex of the vector with the minimum norm: ");
+    printf("%d", vec_sys.min_index);
+    printf("\n\n");
+    printf("///////////////////////////////");
 
     int min_index_par = vec_sys.min_index;
 
@@ -297,6 +384,9 @@ int test5()
     int is_all_right_seq = 0;
     int is_all_right_par = 0;
     int vec_num = 101;
+    double koef = 1000000.0;
+
+    struct timeval start, stop;
 
     char* filename = "../files/input_temp_vec.txt";
     //create_file(vec_num * VEC_LEN, "../files/test_file4.txt");
@@ -307,7 +397,20 @@ int test5()
     input_from_file("../files/test_file4.txt", &vec_sys);
     //input(&vec_sys_part);
 
+    gettimeofday(&start, NULL);
     sequintally_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nSequintally time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
+    printf("\nMinimal norm: ");
+    printf("%lf", vec_sys.norm_min);
+    printf("\n");
+    printf("\nIndex of the vector with the minimum norm: ");
+    printf("%d", vec_sys.min_index);
+    printf("\n\n");
+
 
     int min_index_seq = vec_sys.min_index;
 
@@ -315,7 +418,21 @@ int test5()
         is_all_right_seq = 1;
     }
 
+    gettimeofday(&start, NULL);
     parallel_search(&vec_sys);
+    gettimeofday(&stop, NULL);
+
+    printf("\nParallel time: ");
+    printf("%lf", (double)(stop.tv_usec - start.tv_usec) / koef);
+    printf(" mkrs\n");
+    printf("\nMinimal norm: ");
+    printf("%lf", vec_sys.norm_min);
+    printf("\n");
+    printf("\nIndex of the vector with the minimum norm: ");
+    printf("%d", vec_sys.min_index);
+    printf("\n\n");
+    printf("///////////////////////////////");
+
     int min_index_par = vec_sys.min_index;
 
     if (vec_num == vec_sys.counter && vec_sys.min_index == 55 && vec_sys.norm_min == 0.0){
