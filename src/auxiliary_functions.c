@@ -6,14 +6,20 @@ double** grow(double** str_vec, size_t* len)
     double** temp = NULL;
     if (*len != 0){
         temp = (double**)realloc(str_vec, ((*len)*2)* sizeof(double*));
+        if (temp != NULL){
+            str_vec = temp;
+        }
         *len *= 2;
     }
     else {
         temp = (double**)malloc(sizeof(double*));
+        if (temp != NULL){
+            str_vec = temp;
+        }
         *len = 1;
     }
 
-    return temp;
+    return str_vec;
 }
 
 void input_temp_vec(vec_sys_struct* vec_sys_part)
@@ -65,11 +71,7 @@ void input_from_file(const char* str, vec_sys_struct* vec_sys_part)
 
     while (EOF != fscanf(file, "%15lf", &comp)) {
         if (vec_sys_part->len == iter){
-            double** temp_p = NULL;
-            temp_p = grow(vec_sys_part->vec_sys, &vec_sys_part->len);
-            if (temp_p != NULL){
-                vec_sys_part->vec_sys = temp_p;
-            }
+            vec_sys_part->vec_sys = grow(vec_sys_part->vec_sys, &vec_sys_part->len);
         }
         if (counter == 0) {
             double *temp = NULL;
@@ -109,11 +111,7 @@ void input(vec_sys_struct* vec_sys_part)
 
     while (scanf("%15lf", &comp)) {
         if (vec_sys_part->len == iter){
-            double** temp_p = NULL;
-            temp_p = grow(vec_sys_part->vec_sys, &vec_sys_part->len);
-            if (temp_p != NULL){
-                vec_sys_part->vec_sys = temp_p;
-            }
+            vec_sys_part->vec_sys = grow(vec_sys_part->vec_sys, &vec_sys_part->len);
         }
         if (counter == 0) {
             double *temp = NULL;

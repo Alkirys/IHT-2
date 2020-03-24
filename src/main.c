@@ -31,52 +31,6 @@ int main()
     printf("\nYES");
 
 
-    //char* filename = "../files/input_temp_vec.txt";
-    //create_file(1000000 * VEC_LEN, "../files/test_file3.txt");
-    //vec_sys_struct vec_sys;
-    //input_temp_vec_from_file(filename, &vec_sys);
-    ////input_temp_vec(&vec_sys);
-    //input_from_file("../files/test_file3.txt", &vec_sys);
-    ////input(&vec_sys_part);
-    //clock_t beg = clock();
-    //sequintally_search(&vec_sys);
-    //clock_t end = clock();
-    //double time =(double)(end - beg);
-    //printf("\nSequintally time: ");
-    //printf("%lf", time);
-    //printf("\n");
-    //printf("\nVectors processed: ");
-    //printf("%d", vec_sys.counter);
-    //printf("\n");
-    //printf("\nMinimal norm: ");
-    //printf("%lf", vec_sys.norm_min);
-    //printf("\n");
-    //printf("\nIndex of the vector with the minimum norm: ");
-    //printf("%d", vec_sys.min_index);
-    //printf("\n\n");
-    //printf("///////////////////////////////");
-    //
-    //beg = clock();
-    //parallel_search(&vec_sys);
-    //end = clock();
-    //time =(double)(end - beg);
-    //printf("\nParallel time: ");
-    //printf("%lf", time);
-    //printf("\n");
-    //printf("\nVectors processed: ");
-    //printf("%d", vec_sys.counter);
-    //printf("\n");
-    //printf("\nMinimal norm: ");
-    //printf("%lf", vec_sys.norm_min);
-    //printf("\n");
-    //printf("\nIndex of the vector with the minimum norm: ");
-    //printf("%d", vec_sys.min_index);
-    //printf("\n\n");
-    //printf("///////////////////////////////");
-    //
-    //del_vec(vec_sys.temp_vec);
-    //del_vec_sys(vec_sys.vec_sys, vec_sys.len);
-
     return 0;
 }
 
@@ -138,6 +92,7 @@ int test1()
     printf("\nIndex of the vector with the minimum norm: ");
     printf("%d", vec_sys.min_index);
     printf("\n\n");
+
     int min_index_seq = vec_sys.min_index;
 
     gettimeofday(&start, NULL);
@@ -159,6 +114,7 @@ int test1()
     printf("%d", vec_sys.min_index);
     printf("\n\n");
     printf("///////////////////////////////");
+
     int min_index_par = vec_sys.min_index;
 
     del_vec(vec_sys.temp_vec);
@@ -274,6 +230,7 @@ int test3()
     printf("\nIndex of the vector with the minimum norm: ");
     printf("%d", vec_sys.min_index);
     printf("\n\n");
+
     int min_index_seq = vec_sys.min_index;
 
     gettimeofday(&start, NULL);
@@ -295,6 +252,7 @@ int test3()
     printf("%d", vec_sys.min_index);
     printf("\n\n");
     printf("///////////////////////////////");
+
     int min_index_par = vec_sys.min_index;
 
     del_vec(vec_sys.temp_vec);
